@@ -601,4 +601,32 @@ public class ArbolGen {
         }
     }
 
+    // listarHastaNivel(int niv): Lista
+    public Lista listarHastaNivel(int niv){
+        Lista listaRetornar = new Lista();
+        if(this.raiz != null){
+            listarHastaNivelAux(this.raiz, niv, listaRetornar, -1);
+        }
+        return listaRetornar;
+    }
+    
+    private void listarHastaNivelAux(NodoGen nodo, int niv, Lista lis, int nivActual){
+        
+        if(nodo != null){
+            nivActual = nivActual + 1;
+            
+            if(nivActual <= niv){
+                lis.insertar(nodo.getElem(), lis.longitud()+1);
+            }
+            
+            if(nodo.getHijoIzquierdo() != null && nivActual < niv){
+                listarHastaNivelAux(nodo.getHijoIzquierdo(), niv, lis, nivActual);
+                NodoGen hijo = nodo.getHijoIzquierdo().getHermanoDerecho();
+                while(hijo != null){
+                    listarHastaNivelAux(hijo, niv, lis, nivActual);
+                    hijo = hijo.getHermanoDerecho();
+                }
+            }
+        }
+    }
 }
