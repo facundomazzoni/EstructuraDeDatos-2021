@@ -394,5 +394,53 @@ public class ArbolBB {
         
         return nuevo;
     }
+    
+    public Lista listarMayorIgual(Comparable elem){
+        Lista listaRetornar = new Lista();
+        if(this.raiz != null){
+            listarMayorIgualAux(this.raiz, elem, listaRetornar);
+        }
+        return listaRetornar;
+    }
+    
+    private void listarMayorIgualAux(NodoABB nodo, Comparable elem, Lista lis){
+        int comparacion = nodo.getElem().compareTo(elem);
+        
+        if(nodo.getIzquierdo() != null && comparacion > 0){
+            listarMayorIgualAux(nodo.getIzquierdo(), elem, lis);
+        }
+        
+        if(comparacion >= 0){
+            lis.insertar(nodo.getElem(), 1);
+        }
+        
+        if(nodo.getDerecho() != null && (comparacion <= 0 || comparacion >= 0)){
+            listarMayorIgualAux(nodo.getDerecho(), elem, lis);
+        }
+    }
+
+    public Lista listarMenores(Comparable elem) {
+        Lista listaRetornar = new Lista();
+        if (this.raiz != null) {
+            listarMenoresAux(this.raiz, elem, listaRetornar);
+        }
+        return listaRetornar;
+    }
+
+    private void listarMenoresAux(NodoABB nodo, Comparable elem, Lista lis) {
+        int comparacion = nodo.getElem().compareTo(elem);
+
+        if (nodo.getIzquierdo() != null) {
+            listarMenoresAux(nodo.getIzquierdo(), elem, lis);
+        }
+
+        if(comparacion < 0){
+            lis.insertar(nodo.getElem(), lis.longitud()+1);
+        }
+        
+        if(nodo.getDerecho() != null && comparacion < 0){
+            listarMenoresAux(nodo.getDerecho(), elem, lis);
+        }
+    }
 
 }
