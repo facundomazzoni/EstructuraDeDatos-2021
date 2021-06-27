@@ -83,6 +83,9 @@ public class Cola {
         for (i = this.frente; i != this.fin; i = (i + 1) % this.TAMANIO) {
             this.arreglo[i] = null;
         }
+        
+        this.fin = 0;
+        this.frente = 0;
     }
 
     public Cola clone() {
